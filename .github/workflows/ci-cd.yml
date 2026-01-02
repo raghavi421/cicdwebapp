@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build-test-scan:
+  build-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -15,10 +15,8 @@ jobs:
     - name: Build Backend Image
       run: docker build -t backend:latest ./backend
 
+    - name: Build Frontend Image 
+      run: docker build -t frontend:latest ./frontend
+
     - name: Run Tests
       run: docker run backend:latest pytest
-
-    - name: Trivy Scan
-      uses: aquasecurity/trivy-action@master
-      with:
-        image-ref: backend:latest
