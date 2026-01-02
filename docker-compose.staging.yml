@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   backend:
-    image: praghavi123/cicdwebappbackend:latest
+    image: praghavi123/backend:latest
     container_name: staging-backend
     ports:
       - "5001:5000"
@@ -11,7 +11,7 @@ services:
     restart: always
 
   frontend:
-    image: praghavi123/cicdwebappfrontend:latest
+    image: praghavi123/frontend:latest
     container_name: staging-frontend
     ports:
       - "8081:80"
