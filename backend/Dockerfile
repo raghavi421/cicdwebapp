@@ -8,14 +8,20 @@ RUN pip install --user -r requirements.txt
 FROM python:3.11-slim
 WORKDIR /app
 
-# Non-root user
+# Create non-root user
 RUN useradd -m appuser
+
+# Give appuser permission to /app
+RUN chown -R appuser:appuser /app
+
 USER appuser
 
+# Copy installed packages
 COPY --from=builder /root/.local /home/appuser/.local
 ENV PATH=/home/appuser/.local/bin:$PATH
 
-COPY app.py .
+# Copy application & tests
+COPY app.py test_app.py ./
 
 EXPOSE 5000
 CMD ["python", "app.py"]
